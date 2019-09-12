@@ -32,23 +32,9 @@ git clone git@github.com:11philip22/scripts.git $HOME/scripts
 chown -R ${username}:${username} $HOME/scripts
 bash $HOME/scripts/deploy-scripts.sh
 
-# fix zsh
-sh -c "$(wget -O- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-ln -s $HOME/scripts/zshrc $HOME/.zshrc
-chown -R ${username}:${username} $HOME/.zshrc
-wget --output-document=$HOME/.oh-my-zsh/themes/junkfood.zsh-theme \
-https://gist.githubusercontent.com/11philip22/60b14d36d923a0e458e060179c5ccfd8/raw/d7f06cee82eff94f55d719f25b3c9ddf1f5c8f8f/junkfood.zsh-theme
-rm -rf $HOME/.oh-my-zsh/.git
-
-# install stack
-echo 'deb http://mirror.transip.net/stack/software/deb/Ubuntu_18.04/ ./' | sudo tee /etc/apt/sources.list.d/stack-client.list
-wget -O - https://mirror.transip.net/stack/release.key | sudo apt-key add -
-sudo apt-get update
-apt-get install stack-client
-
-# fix auto updates
-sed 'APT::Periodic::Update-Package-Lists "1";/APT::Periodic::Update-Package-Lists "0";/' /etc/apt/apt.conf.d/20auto-upgrades
-sed 'APT::Periodic::Unattended-Upgrade "1";/APT::Periodic::Unattended-Upgrade "0";/' /etc/apt/apt.conf.d/20auto-upgrades
+# fix grub
+sed 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi=force"/' /etc/default/grub
+grub-mkconfig
 
 # fix vim
 sed 's/Exec=vim/Exec=urxvt -e vim/' /usr/share/applications/vim.desktop
@@ -64,6 +50,24 @@ Section "Device"
    Option      "TearFree"    "true"
 EndSection
 EOF
+
+# fix auto updates
+sed 'APT::Periodic::Update-Package-Lists "1";/APT::Periodic::Update-Package-Lists "0";/' /etc/apt/apt.conf.d/20auto-upgrades
+sed 'APT::Periodic::Unattended-Upgrade "1";/APT::Periodic::Unattended-Upgrade "0";/' /etc/apt/apt.conf.d/20auto-upgrades
+
+# fix zsh
+sh -c "$(wget -O- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+ln -s $HOME/scripts/zshrc $HOME/.zshrc
+chown -R ${username}:${username} $HOME/.zshrc
+wget --output-document=$HOME/.oh-my-zsh/themes/junkfood.zsh-theme \
+https://gist.githubusercontent.com/11philip22/60b14d36d923a0e458e060179c5ccfd8/raw/d7f06cee82eff94f55d719f25b3c9ddf1f5c8f8f/junkfood.zsh-theme
+rm -rf $HOME/.oh-my-zsh/.git
+
+# install stack
+echo 'deb http://mirror.transip.net/stack/software/deb/Ubuntu_18.04/ ./' | sudo tee /etc/apt/sources.list.d/stack-client.list
+wget -O - https://mirror.transip.net/stack/release.key | sudo apt-key add -
+sudo apt-get update
+apt-get install stack-client
 
 # install qemu/kvm
 apt-get -y install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
