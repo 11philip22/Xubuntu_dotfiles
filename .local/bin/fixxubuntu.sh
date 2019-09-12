@@ -26,18 +26,6 @@ xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/image
 # set gtk theme
 xfconf-query -c xsettings -p /Net/ThemeName -s "Numix"
 
-# set terminal settings
-wget --output-document=$HOME/.Xresources \
-https://raw.githubusercontent.com/11philip22/config-./master/.Xresources
-mkdir -pv $HOME/.urxvt/ext
-wget --output-document=$HOME/.urxvt/ext/resize-font \
-https://raw.githubusercontent.com/simmel/urxvt-resize-font/master/resize-font
-echo "URxvt.geometry: 150x40" >> $HOME/.Xresources
-
-# set ranger settings
-mkdir -pv $HOME/.config/ranger
-svn checkout https://github.com/11philip22/config-./trunk/.config/ranger $HOME/.config/ranger
-
 # download scripts
 mkdir -pv $HOME/scripts
 git clone git@github.com:11philip22/scripts.git $HOME/scripts
@@ -77,14 +65,6 @@ Section "Device"
 EndSection
 EOF
 
-# set keybindings
-wget --output-document=$HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml \
-https://gist.githubusercontent.com/11philip22/f29f3c074302f4c1e8994887b4b96b21/raw/0eda1a40d6e699f70cbf0aa3e19ee83ccabcc414/xfce4-keyboard-shortcuts.xml
-
-# set default applications
-echo "WebBrowser=chromium-browser" > $HOME/.config/xfce4/helpers.rc
-echo "TerminalEmulator=urxvt" >> $HOME/.config/xfce4/helpers.rc
-
 # install qemu/kvm
 apt-get -y install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
 adduser ${username} libvirt
@@ -109,22 +89,3 @@ apt-get update
 apt-get install docker-ce docker-ce-cli containerd.io
 groupadd docker
 usermod -aG docker ${username}
-
-# fix bluetooth audio
-# https://freedompenguin.com/articles/how-to/ubuntu-bluetooth-headphones-fix/
-# make backups
-cp /etc/bluetooth/input.conf /etc/bluetooth/input.conf.bak
-cp /usr/bin/start-pulseaudio-x11 /usr/bin/start-pulseaudio-x11.bak
-cp /etc/bluetooth/main.conf /etc/bluetooth/main.conf.bak
-cp /etc/pulse/default.pa /etc/pulse/default.pa.bak
-#download config files
-wget --output-document=/etc/bluetooth/input.conf \
-https://pastebin.com/raw/nzzTQCUT
-wget --output-document=/usr/bin/start-pulseaudio-x11 \
-https://pastebin.com/raw/TSkxbQh6
-wget --output-document=/etc/bluetooth/main.conf \
-https://pastebin.com/raw/CSH9dtVp
-wget --output-document=/etc/pulse/default.pa \
-https://pastebin.com/raw/q1jB7qDs
-echo "# added by me: headset fix" >> /etc/modprobe.d/alsa-base.conf
-echo "options snd-hda-intel model=generic" >> /etc/modprobe.d/alsa-base.conf
