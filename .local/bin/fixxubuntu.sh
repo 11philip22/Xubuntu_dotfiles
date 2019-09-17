@@ -18,6 +18,9 @@ chromium curl
 apt remove -y pidgin sgt-launcher sgt-puzzles gnome-sudoku gnome-mines xfburn onboard mousepad remmina
 apt autoremove
 
+# disable cups because it makes my pc hang at shutdown
+systemctl disable cups-browsed.service
+
 # set wallpaper
 wget --output-document=/usr/share/backgrounds/wallpaper1.png https://i.imgur.com/kfHKnjt.png
 wget --output-document=/usr/share/backgrounds/wallpaper2.jpg https://i.imgur.com/035woPC.jpg
