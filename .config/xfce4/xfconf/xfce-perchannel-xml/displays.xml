@@ -46,8 +46,8 @@
       <property name="Reflection" type="string" value="0"/>
       <property name="Primary" type="bool" value="false"/>
       <property name="Position" type="empty">
-        <property name="X" type="int" value="825"/>
-        <property name="Y" type="int" value="1440"/>
+        <property name="X" type="int" value="0"/>
+        <property name="Y" type="int" value="0"/>
       </property>
     </property>
     <property name="HDMI1" type="string" value="2. Dell 27&quot;">

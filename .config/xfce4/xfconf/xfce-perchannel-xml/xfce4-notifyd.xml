@@ -12,9 +12,11 @@
       <value type="string" value="jetbrains-toolbox"/>
       <value type="string" value="nm-applet"/>
       <value type="string" value="notify-send"/>
+      <value type="string" value="org.gnome.Software"/>
       <value type="string" value="Pidgin"/>
       <value type="string" value="Slack"/>
       <value type="string" value="STACK"/>
+      <value type="string" value="System Config Printer Notification"/>
       <value type="string" value="thunar-volman"/>
       <value type="string" value="Thunderbird"/>
       <value type="string" value="update-notifier"/>
