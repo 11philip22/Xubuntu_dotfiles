@@ -56,7 +56,6 @@
       </property>
       <property name="&lt;Shift&gt;&lt;Alt&gt;c" type="string" value="xflock4"/>
       <property name="Print" type="string" value="xfce4-screenshooter -r"/>
-      <property name="Super_L" type="string" value="xfce4-popup-whiskermenu"/>
       <property name="&lt;Alt&gt;p" type="string" value="xfce4-display-settings --minimal"/>
     </property>
   </property>
