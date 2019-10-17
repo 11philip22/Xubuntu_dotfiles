@@ -87,6 +87,7 @@
     </property>
     <property name="plugin-22" type="string" value="statusnotifier">
       <property name="known-items" type="array">
+        <value type="string" value="steam"/>
         <value type="string" value="TelegramDesktop"/>
         <value type="string" value="nativefier-placeholder1"/>
         <value type="string" value="whats-app-nativefier-d525421"/>
